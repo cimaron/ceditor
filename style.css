@@ -1,0 +1,35 @@
+body {
+	background-color: #666666;
+}
+
+.left {
+	float: left;
+	width: 19%;
+	margin-right: 1%;
+}
+
+.right {
+	float: left;
+	width: 80%;
+}
+
+#cwd {
+	width: 80%;
+}
+
+#dir {
+	background-color: #FFFFFF;
+	padding: 4px;
+}
+
+#dir a {
+	text-decoration: none;
+	color: #000000;
+}
+
+#console {
+	width: 100%;
+	border: none;
+	margin-top: 10px;
+	height: 200px;
+}
