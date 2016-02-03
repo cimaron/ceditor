@@ -7,12 +7,6 @@ window.onload = function() {
 	var ws = new WebSocket("ws://dev.cimaron.vm:1984");
 	ws.onopen = function (event) {
 
-		ws.send(JSON.stringify({
-			uid : 1,
-			fn : 'fs.ls',
-			args : {path : "/var/www/www.cimaron.vm/files/"}
-		}));
-
 		ws.onmessage = function(event) {
 			var data = JSON.parse(event.data);
 			
@@ -102,15 +96,29 @@ function cwd(path) {
 		var out = "";
 		var file;
 
-		out += '<div><a href="#" onclick="cwd(\'..\');">..</a></div>';
+		files.sort(function(a, b) {
+			if (a.is_dir && !b.is_dir) {
+				return -1;
+			}
+			if (b.is_dir && !a.is_dir) {
+				return 1;
+			}
+			var an = a.name.toLowerCase();
+			var bn = b.name.toLowerCase();
+			if (an < bn) return -1;
+			if (an > bn) return 1;
+			return 0;
+		});
+
+		out += '<div><a href="#" onclick="cwd(\'..\');">+ ..</a></div>';
 
 		for (var i = 0; i < files.length; i++) {
 			file = files[i];
 
 			if (file.is_dir) {
-				out += '<div><a href="#" onclick="cwd(\'' + file.name + '\');">' + file.name + '</a></div>';
+				out += '<div><a href="#" onclick="cwd(\'' + file.name + '\');">+ ' + file.name + '</a></div>';
 			} else {
-				out += '<div><a href="#" onclick="doLoad(\'' + file.name + '\');">' + file.name + '</a></div>';
+				out += '<div><a href="#" onclick="doLoad(\'' + file.name + '\');">&nbsp;&nbsp;&nbsp; ' + file.name + '</a></div>';
 			}
 		}
 

@@ -14,7 +14,7 @@
 <body>
 
 <div class="left">
-	<input type="text" id="cwd" value="/var/www/www.cimaron.vm/files/projects/editor/simple" /><button type="button" onclick="doCd(this.value);">CD</button>
+	<input type="text" id="cwd" value="/var/www/www.cimaron.vm/files/projects/editor/simple" /><button type="button" onclick="cwd();">CD</button>
 	<div id="dir"></div>
 
 	<textarea id="console" disabled="disabled"></textarea>
