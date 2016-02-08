@@ -32,6 +32,9 @@
 		this.element.resizable();
 		this.element.on('click', this.onClick.bind(this));
 
+		this.element.css('z-index', CEWindow.topZ);
+		CEWindow.topZ++;
+
 		CEWidget.prototype.init.apply(this, []);
 	};
 
