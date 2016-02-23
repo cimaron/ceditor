@@ -67,14 +67,19 @@
 			return;
 		}
 
-		if (CEWindow.activeWindow) {
-			CEWindow.activeWindow.active = false;
+		var current = CEWindow.activeWindow;
+
+		if (current) {
+			current.active = false;
+			current.titlebar.removeClass('active');
 		}
 
 		CEWindow.activeWindow = this;
 		this.active = true;
 		this.element.css('z-index', CEWindow.topZ);
 		CEWindow.topZ++;
+
+		this.titlebar.addClass('active');
 	};
 
 	window.CEWindow = CEWindow;
