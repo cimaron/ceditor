@@ -16,6 +16,40 @@
 
 		CEWindow.prototype.init.apply(this, []);
 
+		$(window).on('keydown', function(e) {
+
+			if (!this.active) {
+				return;
+			}
+
+			var active, next;
+
+			//up key
+			if (e.keyCode == 38 || e.keyCode == 40 || e.keyCode == 13) {
+				active = this.body.find("a.selected").parent();
+			}
+
+			if (e.keyCode == 38) {
+				next = active.prev("div");
+			}
+
+			if (e.keyCode == 40) {
+				next = active.next("div");
+			}
+
+			if (e.keyCode == 13) {
+				this.openSelected();
+				return;
+			}
+
+			if (next.length > 0) {
+				active.find("a").removeClass("selected");
+				next.find("a").addClass("selected");
+			}
+
+
+		}.bind(this));
+
 		this.refresh();
 	};
 
@@ -50,7 +84,7 @@
 			}
 
 			this.body.html(out);
-			this.body.find("a").on('dblclick', this.dblclick.bind(this));
+			this.body.find("a").on('dblclick', this.openSelected.bind(this));
 
 			this.body.find("a").on('click', this.click.bind(this));
 
@@ -63,9 +97,8 @@
 		el.addClass('selected');
 	};
 
-	CEFileTree.prototype.dblclick = function(e) {
-
-		var el = $(e.target);
+	CEFileTree.prototype.openSelected = function() {
+		var el = this.body.find("a.selected");
 		var path = el.data('path');
 		var cwd = this.cwd;
 
