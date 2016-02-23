@@ -23,17 +23,27 @@
 		this.element.addClass('ce-window');
 
 		this.titlebar = $('<div />').addClass('ce-window-title');
+		this.titlebar.append('<div class="ce-window-title-text" />');
+
 		this.body = $('<div />').addClass('ce-window-body');
+		this.closeBtn = $('<div />').html('&times;').addClass('ce-window-close');
 
 		this.element.append(this.titlebar);
 		this.element.append(this.body);
+		this.titlebar.append(this.closeBtn);
 
 		this.element.draggable({ handle: this.titlebar });
 		this.element.resizable();
-		this.element.on('click', this.onClick.bind(this));
+		
+		this.element.on('mousedown', function() {
+			this.element.css('z-index', CEWindow.topZ);
+			CEWindow.topZ++;
+		}.bind(this));
 
 		this.element.css('z-index', CEWindow.topZ);
 		CEWindow.topZ++;
+
+		this.closeBtn.on('click', this.close.bind(this));
 
 		CEWidget.prototype.init.apply(this, []);
 	};
@@ -41,12 +51,11 @@
 	CEWindow.topZ = 2;
 
 	CEWindow.prototype.setTitle = function(title) {
-		this.titlebar.text(title);
+		this.titlebar.find('.ce-window-title-text').text(title);
 	};
 
-	CEWindow.prototype.onClick = function() {
-		this.element.css('z-index', CEWindow.topZ);
-		CEWindow.topZ++;
+	CEWindow.prototype.close = function() {
+		this.element.remove();
 	};
 
 	window.CEWindow = CEWindow;

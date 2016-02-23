@@ -55,7 +55,8 @@ ul.ce-menu > li.active ul {
 }
 
 .ce-window-title {
-	background-color: #CCCCCC;
+	position: relative;
+	background-color: #999999;
 	margin-top: -30px;
 	height: 30px;
 	font-weight: bold;
@@ -63,6 +64,20 @@ ul.ce-menu > li.active ul {
 	line-height: 30px;
 	cursor: default;
 	user-select: none;
+}
+
+.ce-window-close {
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 30px;
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+}
+
+.ce-window-close:hover {
+	background-color: #CCCCDD;
 }
 
 .ce-window-body {
