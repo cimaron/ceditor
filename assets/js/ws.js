@@ -8,6 +8,7 @@
 		this.uid = 1;
 		this.requests = [];
 		this.connected = false;
+		this.connecting = false;
 	}
 
 	/**
@@ -15,17 +16,34 @@
 	 */
 	WS.prototype.connect = function() {
 
+		if (this.connected) {
+			return;
+		}
+
 		this.ws = new WebSocket(this.host);
+
+		this.ws.onerror = function() {
+			this.connected = false;
+			this.connecting = false;
+		};
 
 		this.ws.onopen = function() {
 
 			this.ws.onmessage = this.onMessage.bind(this);
 			this.connected = true;
+			this.connecting = false;
 
 			this.flush();
 
 		}.bind(this);
 
+		this.ws.onclose = function() {
+			
+			this.connected = false;
+
+		}.bind(this);
+
+		this.connecting = true;
 	};
 
 	/**
@@ -82,6 +100,10 @@
 	WS.prototype.flush = function() {
 
 		if (!this.connected) {
+			//try to connect
+			if (!this.connecting) {
+				this.connect();
+			}
 			return;
 		}
 
