@@ -9,36 +9,56 @@
 	 */
 	function loadScript(name) {
 
-		var script = document.createElement('script');
-		script.type = 'text/javascript';
-		script.src = name;
-
 		var promise = new Promise(function(resolve, reject) {
-			$(script).on('load', function() {
-				resolve();
-			});
+			
+			var script = document.createElement('script');
+			script.type = 'text/javascript';
+			script.src = name;
+			script.async = true;
+			var loaded = false;
+
+			script.onload = function() {
+				if (!loaded) {
+					loaded = true;
+					resolve(this);
+				}
+			};
+
+			script.onerror = script.onabort = reject;
+	
+			document.getElementsByTagName("head")[0].appendChild(script);
 		});
 
-		document.getElementsByTagName("head")[0].appendChild(script);
-		
 		return promise;
+	}
+
+
+
+	function loadScripts(list) {
+
+		return list.reduce(function(cur, next) {
+			return cur.then(function() {
+				return loadScript(next);
+			});
+		}, Promise.resolve());
 	}
 
 	
 	//When all the scripts have loaded, complete the promise
-	var all = Promise.all([
+	//var all = Promise.all([
+	loadScripts([
 
 		//Load files here
-		loadScript("assets/js/node/node.js"),
+		("assets/js/node/node.js"),
+		("assets/js/config.js"),
 
-		loadScript("assets/js/widget.js"),
-		loadScript("assets/js/config.js"),
-		loadScript("assets/js/document.js"),
-		loadScript("assets/js/menu.js"),
-		loadScript("assets/js/ws.js"),
-		loadScript("assets/js/window.js"),
-		loadScript("assets/js/filetree.js"),
-		loadScript("assets/js/editorwindow.js")
+		("assets/js/widget.js"),
+		("assets/js/document.js"),
+		("assets/js/menu.js"),
+		("assets/js/ws.js"),
+		("assets/js/window.js"),
+		("assets/js/filetree.js"),
+		("assets/js/editorwindow.js")
 	
 	]).then(function() {
 
