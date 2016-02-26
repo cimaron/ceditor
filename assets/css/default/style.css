@@ -219,4 +219,5 @@ ul.ce-menu > li.active ul {
 	width: 100%;
 	height: 100%;
 	color: #000033;
+	tab-size: 4;
 }
