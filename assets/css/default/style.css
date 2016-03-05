@@ -221,3 +221,21 @@ ul.ce-menu > li.active ul {
 	color: #000033;
 	tab-size: 4;
 }
+.ce-window-log .ce-window-body {
+	height: 200px;
+	overflow: auto;
+}
+
+.ce-window-log .ce-timestamp {
+	color: #666666;
+	float: left;
+	height: 100%;
+	margin-right: 20px;
+}
+
+.ce-window-log-line:after {
+	content: "";
+	clear: both;
+	display: block;
+}
+

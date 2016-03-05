@@ -58,7 +58,8 @@
 		("assets/js/ws.js"),
 		("assets/js/window.js"),
 		("assets/js/filetree.js"),
-		("assets/js/editorwindow.js")
+		("assets/js/editorwindow.js"),
+		("assets/js/windows/log.js")
 	
 	]).then(function() {
 
@@ -102,6 +103,14 @@ if (e.ctrlKey || e.metaKey) {
 		CEApp.document.addChild(CEApp.filelist);
 
 		CEApp.filelist.element.css('top', 100);
+
+		CEApp.logger = new CEWindowLog();
+		CEApp.document.addChild(CEApp.logger);
+		CEApp.logger.element.css('top', 500);
+
+		CEApp.log = function() {
+			CEApp.logger.log.apply(CEApp.logger, arguments);
+		};
 
 	});
 
