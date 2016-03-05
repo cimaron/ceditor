@@ -54,12 +54,12 @@
 
 		("assets/js/widget.js"),
 		("assets/js/document.js"),
+		("assets/js/window.js"),
+		("assets/js/windows/log.js"),
 		("assets/js/menu.js"),
 		("assets/js/ws.js"),
-		("assets/js/window.js"),
 		("assets/js/filetree.js"),
-		("assets/js/editorwindow.js"),
-		("assets/js/windows/log.js")
+		("assets/js/editorwindow.js")
 	
 	]).then(function() {
 
@@ -75,8 +75,6 @@
 			
 			CEApp.document.setMenu(CEApp.menu);
 
-		CEApp.ws = new WS("ws://dev.cimaron.vm:1984");
-		CEApp.ws.connect();
 
 		$(window).on('keydown', function(e) {
 
@@ -99,10 +97,7 @@ if (e.ctrlKey || e.metaKey) {
 
 		});
 
-		CEApp.filelist = new CEFileTree();
-		CEApp.document.addChild(CEApp.filelist);
 
-		CEApp.filelist.element.css('top', 100);
 
 		CEApp.logger = new CEWindowLog();
 		CEApp.document.addChild(CEApp.logger);
@@ -111,6 +106,15 @@ if (e.ctrlKey || e.metaKey) {
 		CEApp.log = function() {
 			CEApp.logger.log.apply(CEApp.logger, arguments);
 		};
+
+		CEApp.ws = new WS("ws://dev.cimaron.vm:1984");
+		CEApp.ws.connect();
+
+		CEApp.filelist = new CEFileTree();
+		CEApp.document.addChild(CEApp.filelist);
+		CEApp.filelist.element.css('top', 100);
+
+
 
 	});
 

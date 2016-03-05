@@ -23,9 +23,12 @@
 		this.ws = new WebSocket(this.host);
 
 		this.ws.onerror = function() {
+			if (this.connected) {
+				CEApp.log("Connection error");
+			}
+
 			this.connected = false;
 			this.connecting = false;
-			CEApp.log("Connection error");
 		};
 
 		this.ws.onopen = function() {
@@ -42,11 +45,17 @@
 
 		this.ws.onclose = function() {
 			
+			if (this.connected) {
+				CEApp.log("Disconnected from server");
+			}
+
 			this.connected = false;
-			CEApp.log("Disconnected from server");
+
+			setTimeout(this.connect.bind(this), 2000);
 
 		}.bind(this);
 
+		//CEApp.log("Connecting to server");
 		this.connecting = true;
 	};
 
