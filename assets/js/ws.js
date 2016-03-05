@@ -25,6 +25,7 @@
 		this.ws.onerror = function() {
 			this.connected = false;
 			this.connecting = false;
+			CEApp.log("Connection error");
 		};
 
 		this.ws.onopen = function() {
@@ -35,11 +36,14 @@
 
 			this.flush();
 
+			CEApp.log("Connected to server");
+
 		}.bind(this);
 
 		this.ws.onclose = function() {
 			
 			this.connected = false;
+			CEApp.log("Disconnected from server");
 
 		}.bind(this);
 

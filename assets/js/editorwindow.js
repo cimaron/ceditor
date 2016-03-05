@@ -64,15 +64,19 @@
 				// prevent the focus lose
 				e.preventDefault();
 			}
+
+			win.updateStatus();
+
 		});
 
 	};
 	
 	CEEditorWindow.prototype.open = function() {
-
+		CEApp.log("Opening " + this.path.split("/").slice(-1));
 		CEApp.ws.call('fs.readFile', {path : this.path}).then(function(data) {
 			this.editor.val(data);
 			this.value = data;
+			CEApp.log("Loaded " + this.path.split("/").slice(-1));
 		}.bind(this));
 
 	};
@@ -102,6 +106,7 @@
 
 		var path = this.path;
 		var data = this.editor.val();
+		CEApp.log("Saving " + this.path.split('/').slice(-1));
 
 		CEApp.ws.call('fs.writeFile', {
 			path : path,
@@ -110,6 +115,7 @@
 			this.dirty = false;
 			this.setTitle(this.path);
 			this.value = this.editor.val();
+			CEApp.log("Saved " + this.path.split('/').slice(-1));
 		}.bind(this));
 	};
 
