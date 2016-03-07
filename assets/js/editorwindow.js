@@ -21,7 +21,9 @@
 			return this.instances[path];
 		}
 
-		return new CEEditorWindow(path);
+		this.instances[path] = new CEEditorWindow(path);
+		
+		return this.instances[path];
 	};
 
 	CEEditorWindow.prototype.init = function() {
@@ -117,6 +119,11 @@
 			this.value = this.editor.val();
 			CEApp.log("Saved " + this.path.split('/').slice(-1));
 		}.bind(this));
+	};
+
+	CEEditorWindow.prototype.onClose = function(e) {
+		CEWindow.prototype.onClose.apply(this, [e]);
+		delete CEEditorWindow.instances[this.path];
 	};
 
 	CEEditorWindow.saveCurrent = function() {
