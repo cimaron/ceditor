@@ -118,19 +118,27 @@
 		} else if (el.hasClass('ce-file')) {
 			this.open(cwd);
 		}
+		
 	};
 
 	CEFileTree.prototype.open = function(path) {
+		var pos = CEWindow.pos;
 		
 		var win = CEEditorWindow.getInstance(path);
-		CEApp.document.addChild(win);
-		win.element.css('left', 500);
-		win.element.css('top', 100);
-		win.element.width(800);
-		win.element.height(600);
 
+		if (!win.element.parent().length) {
+			CEApp.document.addChild(win);
+			//Shift new window position by 40 up to 10 times
+			win.element.css('left', pos.x + (pos.n % 10) * 40);
+			win.element.css('top', pos.y + (pos.n % 10) * 40);
+			win.element.width(800);
+			win.element.height(600);
+		}
+
+		win.setActive();
 	};
 
 	window.CEFileTree = CEFileTree;
 
 }());
+

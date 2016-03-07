@@ -6,6 +6,7 @@
 	function CEWindow(title) {
 		CEWidget.apply(this, []);
 		this.setTitle(title);
+		this.events = new events();
 	}
 
 	//Inherit from Widget
@@ -21,6 +22,7 @@
 		}
 
 		this.element.addClass('ce-window');
+		this.element.css({left : 0, top : 0});
 
 		this.titlebar = $('<div />').addClass('ce-window-title');
 		this.titlebar.append('<div class="ce-window-title-text" />');
@@ -39,11 +41,18 @@
 
 		this.element.on('mousedown', this.setActive.bind(this));
 		this.setActive();
+		CEWindow.pos.n++;
 
 		CEWidget.prototype.init.apply(this, []);
 	};
 
-	CEWindow.topZ = 2;
+	CEWindow.pos = {
+		z : 2,
+		x : 400,
+		y : 50,
+		n : -1
+	};
+
 	CEWindow.activeWindow = null;
 
 	CEWindow.prototype.setTitle = function(title) {
@@ -63,11 +72,11 @@
 	 */
 	CEWindow.prototype.setActive = function() {
 	
-		if (this.active) {
+		var current = CEWindow.activeWindow;
+
+		if (this === current) {
 			return;
 		}
-
-		var current = CEWindow.activeWindow;
 
 		if (current) {
 			current.active = false;
@@ -76,8 +85,8 @@
 
 		CEWindow.activeWindow = this;
 		this.active = true;
-		this.element.css('z-index', CEWindow.topZ);
-		CEWindow.topZ++;
+
+		this.element.css('z-index', CEWindow.pos.z++);
 
 		this.titlebar.addClass('active');
 	};
