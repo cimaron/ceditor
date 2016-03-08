@@ -53,6 +53,7 @@
 		("assets/js/config.js"),
 
 		("assets/js/widget.js"),
+		("assets/js/app/app.js"),
 		("assets/js/app/keybindings.js"),
 		("assets/js/document.js"),
 		("assets/js/widget/window.js"),
@@ -64,37 +65,7 @@
 	
 	]).then(function() {
 
-		CEApp = {};
-		CEApp.config = new CEConfig();
-
-		CEApp.document = new CEDocument($('body'));
-
-			CEApp.menu = new CEMenu();
-			CEApp.menu.element.addClass('ce-application-menu');
-			
-			CEApp.menu.element.html('<li><u>F</u>ile</li><li>Edit</li><li>View</li><li>Insert</li><li>Help</li>');
-			
-			CEApp.document.setMenu(CEApp.menu);
-
-		new CEAppKeyBindings();
-
-		CEApp.logger = new CEWindowLog();
-		CEApp.document.addChild(CEApp.logger);
-		CEApp.logger.element.css('top', 500);
-
-		CEApp.log = function() {
-			CEApp.logger.log.apply(CEApp.logger, arguments);
-		};
-
-		CEApp.ws = new WS("ws://dev.cimaron.vm:1984");
-		CEApp.ws.connect();
-
-		CEApp.filelist = new CEFileTree();
-		CEApp.document.addChild(CEApp.filelist);
-		CEApp.filelist.element.css('top', 100);
-
-
-
+		CEApp.init();
 	});
 
 }(jQuery));
