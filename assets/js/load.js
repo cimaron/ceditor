@@ -53,6 +53,7 @@
 		("assets/js/config.js"),
 
 		("assets/js/widget.js"),
+		("assets/js/app/keybindings.js"),
 		("assets/js/document.js"),
 		("assets/js/widget/window.js"),
 		("assets/js/windows/log.js"),
@@ -75,29 +76,7 @@
 			
 			CEApp.document.setMenu(CEApp.menu);
 
-
-		$(window).on('keydown', function(e) {
-
-if (e.ctrlKey || e.metaKey) {
-        switch (String.fromCharCode(e.which).toLowerCase()) {
-        case 's':
-			CEEditorWindow.saveCurrent();
-            e.preventDefault();
-            break;
-        case 'f':
-            e.preventDefault();
-			console.log('ctrl-f');
-            break;
-        case 'g':
-            e.preventDefault();
-			console.log('ctrl-g');
-            break;
-        }
-    }
-
-		});
-
-
+		new CEAppKeyBindings();
 
 		CEApp.logger = new CEWindowLog();
 		CEApp.document.addChild(CEApp.logger);
