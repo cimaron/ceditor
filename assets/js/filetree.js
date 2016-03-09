@@ -124,7 +124,7 @@
 	CEFileTree.prototype.open = function(path) {
 		var pos = CEWindow.pos;
 		
-		var win = CEEditorWindow.getInstance(path);
+		var win = CEWindowEditorText.getInstance(path);
 
 		if (!win.element.parent().length) {
 			CEApp.document.addChild(win);
@@ -141,4 +141,3 @@
 	window.CEFileTree = CEFileTree;
 
 }());
-

@@ -61,7 +61,7 @@
 		("assets/js/menu.js"),
 		("assets/js/ws.js"),
 		("assets/js/filetree.js"),
-		("assets/js/editorwindow.js")
+		("assets/js/windows/editortext.js")
 	
 	]).then(function() {
 

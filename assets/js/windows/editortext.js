@@ -1,32 +1,31 @@
 (function() {
 
 	/**
-	 * File Tree Class
+	 * Editor Text Window Class
 	 */
-	function CEEditorWindow(path) {
+	function CEWindowEditorText(path) {
 		this.path = path;
 		CEWindow.apply(this, [path]);
 	}
 
 	//Inherit from Widget
-	util.inherits(CEEditorWindow, CEWindow);
+	util.inherits(CEWindowEditorText, CEWindow);
 
 
+	CEWindowEditorText.instances = {};
 
-	CEEditorWindow.instances = {};
-
-	CEEditorWindow.getInstance = function(path) {
+	CEWindowEditorText.getInstance = function(path) {
 
 		if (this.instances[path]) {
 			return this.instances[path];
 		}
 
-		this.instances[path] = new CEEditorWindow(path);
+		this.instances[path] = new CEWindowEditorText(path);
 		
 		return this.instances[path];
 	};
 
-	CEEditorWindow.prototype.init = function() {
+	CEWindowEditorText.prototype.init = function() {
 		CEWindow.prototype.init.apply(this, []);
 
 		this.body.html('<textarea class="ce-editor"></textarea>');
@@ -40,11 +39,11 @@
 
 		this.open();
 
-		CEEditorWindow.current = this;
+		CEWindowEditorText.current = this;
 	};
 
 
-	CEEditorWindow.prototype.bindTab = function() {
+	CEWindowEditorText.prototype.bindTab = function() {
 
 		this.editor.on('keydown', function(e) {
 
@@ -67,13 +66,11 @@
 				e.preventDefault();
 			}
 
-			win.updateStatus();
-
 		});
 
 	};
 	
-	CEEditorWindow.prototype.open = function() {
+	CEWindowEditorText.prototype.open = function() {
 		CEApp.log("Opening " + this.path.split("/").slice(-1));
 		CEApp.ws.call('fs.readFile', {path : this.path}).then(function(data) {
 			this.editor.val(data);
@@ -83,14 +80,14 @@
 
 	};
 
-	CEEditorWindow.prototype.onClick = function() {
-		CEEditorWindow.current = this;
+	CEWindowEditorText.prototype.onClick = function() {
+		CEWindowEditorText.current = this;
 		CEWindow.prototype.onClick.apply(this, arguments);
 	};
 
-	CEEditorWindow.current = null;
+	CEWindowEditorText.current = null;
 
-	CEEditorWindow.prototype.onKeyup = function(e) {
+	CEWindowEditorText.prototype.onKeyup = function(e) {
 
 		if (this.dirty) {
 			return;
@@ -104,7 +101,7 @@
 		}
 	};
 
-	CEEditorWindow.prototype.save = function() {
+	CEWindowEditorText.prototype.save = function() {
 
 		var path = this.path;
 		var data = this.editor.val();
@@ -121,19 +118,18 @@
 		}.bind(this));
 	};
 
-	CEEditorWindow.prototype.onClose = function(e) {
+	CEWindowEditorText.prototype.onClose = function(e) {
 		CEWindow.prototype.onClose.apply(this, [e]);
-		delete CEEditorWindow.instances[this.path];
+		delete CEWindowEditorText.instances[this.path];
 	};
 
-	CEEditorWindow.saveCurrent = function() {
-		var current = CEEditorWindow.current;
+	CEWindowEditorText.saveCurrent = function() {
+		var current = CEWindowEditorText.current;
 		if (current) {
 			current.save();
 		}
 	};
 
-	window.CEEditorWindow = CEEditorWindow;
+	window.CEWindowEditorText = CEWindowEditorText;
 
 }());
-

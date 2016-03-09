@@ -32,7 +32,7 @@
 	};
 
 	CEAppKeyBindings.prototype.onCtrlS = function(e, ch) {
-		CEEditorWindow.saveCurrent();
+		CEWindowEditorText.saveCurrent();
 		e.preventDefault();
 	};
 
