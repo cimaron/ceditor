@@ -145,8 +145,10 @@
 	};
 
 	CEWindowEditorText.saveCurrent = function() {
-		var current = CEWindowEditorText.current;
-		if (current) {
+
+		var current = CEWindow.getActiveWindow();
+
+		if (current instanceof CEWindowEditorText) {
 			current.save();
 		}
 	};

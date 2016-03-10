@@ -40,7 +40,9 @@
 		this.closeBtn.on('click', this.close.bind(this));
 
 		this.element.on('mousedown', this.setActive.bind(this));
-		this.setActive();
+
+		CEWindow.pos.order.push(this);
+		this.setActive(true);
 		CEWindow.pos.n++;
 
 		CEWidget.prototype.init.apply(this, []);
@@ -50,17 +52,35 @@
 		z : 2,
 		x : 400,
 		y : 50,
-		n : -1
+		n : -1,
+		order : []
 	};
 
-	CEWindow.activeWindow = null;
+	CEWindow.getActiveWindow = function() {
+		var order = this.pos.order;
+
+		if (order.length == 0) {
+			return null;
+		}
+
+		return order[order.length - 1];
+	};
 
 	CEWindow.prototype.setTitle = function(title) {
 		this.titlebar.find('.ce-window-title-text').text(title);
 	};
 
 	CEWindow.prototype.close = function() {
+		var order = CEWindow.pos.order,
+		    current = CEWindow.getActiveWindow()
+			;
+
+		order.splice(order.indexOf(this), 1);
+
 		this.element.remove();
+		if (current) {
+			current.setActive(force);
+		}
 	};
 
 	CEWindow.prototype.isActive = function() {
@@ -70,11 +90,11 @@
 	/**
 	 * Set current window as active
 	 */
-	CEWindow.prototype.setActive = function() {
+	CEWindow.prototype.setActive = function(force) {
 	
-		var current = CEWindow.activeWindow;
+		var current = CEWindow.getActiveWindow();
 
-		if (this === current) {
+		if (this === current && !force) {
 			return;
 		}
 
@@ -83,11 +103,13 @@
 			current.titlebar.removeClass('active');
 		}
 
-		CEWindow.activeWindow = this;
+		//Move element
+		var order = CEWindow.pos.order;
+		order.splice(order.indexOf(this), 1);
+		order.push(this);
+
 		this.active = true;
-
 		this.element.css('z-index', CEWindow.pos.z++);
-
 		this.titlebar.addClass('active');
 	};
 

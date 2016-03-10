@@ -18,7 +18,7 @@
 
 		$(window).on('keydown', function(e) {
 
-			if (!this.active) {
+			if (CEWindow.getActiveWindow() != this) {
 				return;
 			}
 
