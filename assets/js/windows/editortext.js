@@ -28,12 +28,18 @@
 	CEWindowEditorText.prototype.init = function() {
 		CEWindow.prototype.init.apply(this, []);
 
+		this.element.addClass('ce-editor-window');
+
 		this.body.html('<textarea class="ce-editor"></textarea>');
 		this.editor = this.body.find('textarea');
+		this.status = $('<div />').addClass('ce-editor-status');
+
+		this.body.append(this.status);
 
 		CEApp.currentEditor = this;
 
 		this.editor.on('keyup', this.onKeyup.bind(this));
+		this.editor.on('click', this.updateStatus.bind(this));
 
 		this.bindTab();
 
@@ -44,6 +50,8 @@
 
 
 	CEWindowEditorText.prototype.bindTab = function() {
+
+		var win = this;
 
 		this.editor.on('keydown', function(e) {
 
@@ -85,9 +93,22 @@
 		CEWindow.prototype.onClick.apply(this, arguments);
 	};
 
+	CEWindowEditorText.prototype.updateStatus = function() {
+		var pos = this.editor.prop('selectionStart');
+
+		var before = this.editor.val().substr(0, pos);
+		var row = before.split("\n").length;
+		var col = before.length - before.lastIndexOf("\n");
+
+		this.status.text(/*"raw: " + pos + " | " + */ "row: " + row + " | col: " + col);
+	};
+
 	CEWindowEditorText.current = null;
 
 	CEWindowEditorText.prototype.onKeyup = function(e) {
+
+		this.updateStatus();
+
 
 		if (this.dirty) {
 			return;
