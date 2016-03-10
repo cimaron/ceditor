@@ -16,7 +16,8 @@
 		switch (ch) {
 
 			case 's':
-				this.onCtrlS(e);
+				CEApp.trigger('key.ctrl-s', e);
+				e.preventDefault();
 				break;
 					
 			case 'f':
@@ -30,12 +31,6 @@
 				break;
 		}
 	};
-
-	CEAppKeyBindings.prototype.onCtrlS = function(e, ch) {
-		CEWindowEditorText.saveCurrent();
-		e.preventDefault();
-	};
-
 
 	window.CEAppKeyBindings = CEAppKeyBindings;
 

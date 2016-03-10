@@ -151,6 +151,10 @@
 		}
 	};
 
+	//Events
+	CEApp.on('key.ctrl-s', CEWindowEditorText.saveCurrent);
+
+
 	window.CEWindowEditorText = CEWindowEditorText;
 
 }());

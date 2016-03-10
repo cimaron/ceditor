@@ -33,7 +33,8 @@
 		this.logger.log.apply(this.logger, arguments);
 	};
 
-
+	CEApp.on = events.prototype.on;
+	CEApp.trigger = events.prototype.emit;
 
 	window.CEApp = CEApp;
 
