@@ -79,7 +79,7 @@
 
 		this.element.remove();
 		if (current) {
-			current.setActive(force);
+			current.setActive(true);
 		}
 	};
 
