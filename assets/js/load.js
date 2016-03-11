@@ -60,7 +60,7 @@
 		("assets/js/windows/log.js"),
 		("assets/js/menu.js"),
 		("assets/js/ws.js"),
-		("assets/js/filetree.js"),
+		("assets/js/windows/filetree.js"),
 		("assets/js/windows/editortext.js")
 	
 	]).then(function() {
