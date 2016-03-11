@@ -53,6 +53,7 @@ ul.ce-menu > li.active ul {
 	width: 400px;
 	overflow: hidden;
 	padding-top: 30px;
+	box-shadow: 7px 7px 5px 0px rgba(50, 50, 50, 0.25);
 }
 
 .ce-window-title {
