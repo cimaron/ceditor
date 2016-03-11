@@ -122,20 +122,8 @@
 	};
 
 	CEFileTree.prototype.open = function(path) {
-		var pos = CEWindow.pos;
-		
 		var win = CEWindowEditorText.getInstance(path);
-
-		if (!win.element.parent().length) {
-			CEApp.document.addChild(win);
-			//Shift new window position by 40 up to 10 times
-			win.element.css('left', pos.x + (pos.n % 10) * 40);
-			win.element.css('top', pos.y + (pos.n % 10) * 40);
-			win.element.width(800);
-			win.element.height(600);
-		}
-
-		win.setActive();
+		win.display();
 	};
 
 	window.CEFileTree = CEFileTree;

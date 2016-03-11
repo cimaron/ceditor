@@ -27,6 +27,15 @@
 		this.filelist = new CEFileTree();
 		this.document.addChild(this.filelist);
 		this.filelist.element.css('top', 100);
+
+		//restore windows
+		var openfiles = this.config.get('editor.openfiles', []);
+
+		for (var i = 0; i < openfiles.length; i++) {
+			var win = CEWindowEditorText.getInstance(openfiles[i]);
+			win.display();
+		}
+
 	};
 
 	CEApp.log = function() {

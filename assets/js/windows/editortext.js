@@ -22,6 +22,12 @@
 
 		this.instances[path] = new CEWindowEditorText(path);
 		
+		var openfiles = CEApp.config.get('editor.openfiles', []);
+		if (openfiles.indexOf(path) == -1) {
+			openfiles.push(path);
+			CEApp.config.set('editor.openfiles', openfiles);
+		}
+
 		return this.instances[path];
 	};
 
@@ -139,9 +145,29 @@
 		}.bind(this));
 	};
 
-	CEWindowEditorText.prototype.onClose = function(e) {
-		CEWindow.prototype.onClose.apply(this, [e]);
+	CEWindowEditorText.prototype.close = function(e) {
+		CEWindow.prototype.close.apply(this, [e]);
 		delete CEWindowEditorText.instances[this.path];
+
+		var openfiles = CEApp.config.get('editor.openfiles', []);
+		openfiles.splice(openfiles.indexOf(this.path), 1);
+		CEApp.config.set('editor.openfiles', openfiles);
+	};
+
+	CEWindowEditorText.prototype.display = function() {
+
+		var pos = CEWindow.pos, element = this.element;
+
+		if (!element.parent().length) {
+			CEApp.document.addChild(this);
+			//Shift new window position by 40 up to 10 times
+			element.css('left', pos.x + (pos.n % 10) * 40);
+			element.css('top', pos.y + (pos.n % 10) * 40);
+			element.width(1000);
+			element.height(700);
+		}
+
+		this.setActive();
 	};
 
 	CEWindowEditorText.saveCurrent = function() {
