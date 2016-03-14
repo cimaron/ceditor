@@ -17,6 +17,13 @@
 	 */	
 	CEDocument.prototype.init = function() {
 		$(this.element).addClass('ce-document');
+		
+		var bgImage = CEApp.config.get('desktop.backgroundImage');
+
+		if (bgImage) {
+			$(this.element).css('background-image', "url(" + bgImage + ")");
+		}
+
 		CEWidget.prototype.init.apply(this, []);
 	};
 
@@ -40,4 +47,3 @@
 	window.CEDocument = CEDocument;
 
 }());
-
