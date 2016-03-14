@@ -49,7 +49,7 @@ ul.ce-menu > li.active ul {
 
 .ce-window {
 	position: absolute !important;
-	border: solid 1px #000000;
+	border: solid 1px #DDDDDD;
 	width: 400px;
 	overflow: hidden;
 	padding-top: 30px;
@@ -58,7 +58,7 @@ ul.ce-menu > li.active ul {
 
 .ce-window-title {
 	position: relative;
-	background-color: #CCCCCC;
+	background-color: #DDDDDD;
 	margin-top: -30px;
 	height: 30px;
 	font-weight: bold;
@@ -68,7 +68,11 @@ ul.ce-menu > li.active ul {
 	user-select: none;
 }
 
-.ce-window-title.active {
+.ce-window.active {
+	border-color: #999999;
+}
+
+.ce-window.active .ce-window-title {
 	background-color: #999999;	
 }
 

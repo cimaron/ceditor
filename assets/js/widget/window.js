@@ -41,7 +41,7 @@
 
 		this.element.on('mousedown', this.setActive.bind(this));
 
-		CEWindow.pos.order.push(this);
+		CEWindow.pos.order.unshift(this);
 		this.setActive(true);
 		CEWindow.pos.n++;
 
@@ -100,7 +100,7 @@
 
 		if (current) {
 			current.active = false;
-			current.titlebar.removeClass('active');
+			current.element.removeClass('active');
 		}
 
 		//Move element
@@ -110,7 +110,7 @@
 
 		this.active = true;
 		this.element.css('z-index', CEWindow.pos.z++);
-		this.titlebar.addClass('active');
+		this.element.addClass('active');
 	};
 
 	window.CEWindow = CEWindow;
