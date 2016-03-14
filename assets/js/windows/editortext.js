@@ -36,7 +36,7 @@
 
 		this.element.addClass('ce-editor-window');
 
-		this.body.html('<textarea class="ce-editor"></textarea>');
+		this.body.html('<textarea class="ce-editor" spellcheck="false"></textarea>');
 		this.editor = this.body.find('textarea');
 		this.status = $('<div />').addClass('ce-editor-status');
 
