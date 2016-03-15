@@ -113,6 +113,27 @@
 		this.element.addClass('active');
 	};
 
+	/**
+	 * Show window
+	 */
+	CEWindow.prototype.show = function() {
+		this.element.show();
+	};
+
+	/**
+	 * Hide window
+	 */
+	CEWindow.prototype.hide = function() {
+		this.element.hide();
+	};
+
+	/**
+	 * Toggle window
+	 */
+	CEWindow.prototype.toggle = function() {
+		this.element.toggle();
+	};
+
 	window.CEWindow = CEWindow;
 
 }());
