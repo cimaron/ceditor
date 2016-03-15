@@ -12,8 +12,10 @@
 
 			this.menu = new CEMenu();
 			this.menu.element.addClass('ce-application-menu');
-			
-			this.menu.element.html('<li><u>F</u>ile</li><li>Edit</li><li>View</li><li>Insert</li><li>Help</li>');
+
+			var file = this.menu.addMenu('File');
+			var edit = this.menu.addMenu('Edit');
+			var view = this.menu.addMenu('View');
 			
 			this.document.setMenu(this.menu);
 

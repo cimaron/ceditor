@@ -24,24 +24,35 @@ ul {
 	top: 0;
 	left: 0;
 	width: 100%;
+	z-index: 999999999;
+}
+
+.ce-application-menu > li {
+	float: left;
 }
 
 ul.ce-menu {
-	height: 30px;
 	list-style: none;
 	background-color: #CCCCCC;
 }
 
 ul.ce-menu > li {
-	float: left;
 	height: 10px;
 	line-height: 10px;
 	padding: 10px;
 	cursor: default;
+	position: relative;
 }
 
 ul.ce-menu > li:hover {
 	background-color: #CCCCDD;
+}
+
+ul.ce-menu ul {
+	display: none;
+	position: absolute;
+	top: 100%;
+	left: 0;
 }
 
 ul.ce-menu > li.active ul {
