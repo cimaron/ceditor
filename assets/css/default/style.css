@@ -274,8 +274,11 @@ ul.ce-menu ul {
 .ce-editor-status:hover {
 	opacity: 1;
 }
-.ce-window-log .ce-window-body {
+.ce-window-log {
 	height: 200px;
+}
+
+.ce-window-log .ce-window-body {
 	overflow: auto;
 }
 
