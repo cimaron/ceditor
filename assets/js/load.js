@@ -52,7 +52,7 @@
 		("assets/js/node/node.js"),
 		("assets/js/config.js"),
 
-		("assets/js/widget.js"),
+		("assets/js/widget/widget.js"),
 		("assets/js/app/app.js"),
 		("assets/js/app/keybindings.js"),
 		("assets/js/document.js"),

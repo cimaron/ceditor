@@ -14,7 +14,7 @@
 		this.init();
 	}
 
-	CEWidget.prototype = {};
+	util.inherits(CEWidget, events);
 
 	/**
 	 * Initialize widget
@@ -69,4 +69,3 @@
 	window.CEWidget = CEWidget;
 
 }());
-
