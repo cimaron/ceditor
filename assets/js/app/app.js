@@ -16,15 +16,17 @@
 			var file = this.menu.addMenu('File');
 			var edit = this.menu.addMenu('Edit');
 			var view = this.menu.addMenu('View');
-				var view_files = view.addItem("Files");
+				var view_files = view.addItem("Files", {select:true});
+				view_files.select();
 
-				view_files.on('click', function() {
-					CEApp.filelist.toggle();
+				view_files.on('toggle', function() {
+					CEApp.filelist[this.selected ? 'show' : 'hide']();
 				});
 
-				var view_log = view.addItem("Log");
+				var view_log = view.addItem("Log", {select:true});
+				view_log.select();
 				view_log.on('click', function() {
-					CEApp.logger.toggle();
+					CEApp.logger[this.selected ? 'show' : 'hide']();
 				});
 			
 			this.document.setMenu(this.menu);

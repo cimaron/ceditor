@@ -27,8 +27,9 @@ ul {
 	z-index: 999999999;
 }
 
-.ce-application-menu > li {
+ul.ce-application-menu > li {
 	float: left;
+	padding: 10px !important;
 }
 
 ul.ce-menu {
@@ -39,13 +40,22 @@ ul.ce-menu {
 ul.ce-menu > li {
 	height: 10px;
 	line-height: 10px;
-	padding: 10px;
+	padding: 10px 10px 10px 30px;
 	cursor: default;
 	position: relative;
+	-webkit-user-select: none;
 }
 
 ul.ce-menu > li:hover {
-	background-color: #CCCCDD;
+	background-color: #999999;
+}
+
+ul.ce-menu > li.selected:before {
+	content: "\02713";
+	float: left;
+	margin-left: -20px;
+	width: 10px;
+	text-align: center;
 }
 
 ul.ce-menu ul {
@@ -53,10 +63,6 @@ ul.ce-menu ul {
 	position: absolute;
 	top: 100%;
 	left: 0;
-}
-
-ul.ce-menu > li.active ul {
-	
 }
 
 .ce-window {

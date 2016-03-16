@@ -21,28 +21,23 @@
 		this.element.addClass('ce-menu');
 	};
 
-	CEMenu.prototype.addMenu = function(name) {
+	CEMenu.prototype.addMenu = function(name, options) {
 		
-		var item = this.addItem(name);
+		var item = this.addItem(name, options);
 		var menu = new CEMenu();
 
-		item.data('menu', menu);
-		item.append(menu.element);
+		item.addMenu(menu);
 
 		return menu;
 	};
 
-	CEMenu.prototype.addItem = function(name) {
-		var item = $('<li />').text(name);
+	CEMenu.prototype.addItem = function(name, options) {
 
-		item.on('click', function() {
-			if (item.data('menu')) {
-				item.data('menu').element.toggle();
-			}
-		});
+		var item = new CEMenuItem(name, options);
 
 		this.items.push(item);
-		this.element.append(item);
+		this.element.append(item.element);
+
 		return item;
 	};
 
