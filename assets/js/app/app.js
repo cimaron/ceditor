@@ -16,6 +16,16 @@
 			var file = this.menu.addMenu('File');
 			var edit = this.menu.addMenu('Edit');
 			var view = this.menu.addMenu('View');
+				var view_files = view.addItem("Files");
+
+				view_files.on('click', function() {
+					CEApp.filelist.toggle();
+				});
+
+				var view_log = view.addItem("Log");
+				view_log.on('click', function() {
+					CEApp.logger.toggle();
+				});
 			
 			this.document.setMenu(this.menu);
 
