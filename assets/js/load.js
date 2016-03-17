@@ -55,7 +55,7 @@
 		("assets/js/widget/widget.js"),
 		("assets/js/app/app.js"),
 		("assets/js/app/keybindings.js"),
-		("assets/js/document.js"),
+		("assets/js/app/document.js"),
 		("assets/js/widget/window.js"),
 		("assets/js/windows/log.js"),
 		("assets/js/widget/menu.js"),

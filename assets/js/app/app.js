@@ -8,7 +8,7 @@
 
 		this.config = new CEConfig();
 
-		this.document = new CEDocument($('body'));
+		this.document = new CEDocument();
 
 			this.menu = new CEMenu();
 			this.menu.element.addClass('ce-application-menu');

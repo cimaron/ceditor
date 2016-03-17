@@ -3,8 +3,8 @@
 	/**
 	 * Document Class
 	 */
-	function CEDocument(element) {
-		CEWidget.apply(this, [element]);
+	function CEDocument() {
+		CEWidget.apply(this, []);
 
 		this.menu = null;
 	}
@@ -16,12 +16,14 @@
 	 * Initialize widget
 	 */	
 	CEDocument.prototype.init = function() {
-		$(this.element).addClass('ce-document');
+		
+		this.element = $('<div />').addClass('ce-document');
+		$('body').append(this.element);
 		
 		var bgImage = CEApp.config.get('desktop.backgroundImage');
 
 		if (bgImage) {
-			$(this.element).css('background-image', "url(" + bgImage + ")");
+			this.element.css('background-image', "url(" + bgImage + ")");
 		}
 
 		CEWidget.prototype.init.apply(this, []);
