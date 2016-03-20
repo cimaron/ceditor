@@ -24,6 +24,23 @@ ul {
 	overflow: hidden;
 }
 
+.ce-snap {
+	position: absolute;
+	top: 30px;
+	height: 100%;
+	background-color: #FFFFFF;
+}
+
+.ce-snap-left {
+	left: 0;
+	border-right: solid 1px #999999;
+}
+
+.ce-snap-snapping {
+	min-width: 300px;
+	opacity: .5;
+}
+
 .ce-application-menu {
 	position: absolute;
 	top: 0;
@@ -77,6 +94,16 @@ ul.ce-menu ul {
 	overflow: hidden;
 	padding-top: 30px;
 	box-shadow: 7px 7px 5px 0px rgba(50, 50, 50, 0.25);
+	opacity: .9;
+}
+
+.ce-snap .ce-window {
+	position: static !important;
+	width: 100% !important;
+	min-width: 300px;
+	border: none;
+	box-shadow: none;
+	opacity: 1;
 }
 
 .ce-window-title {
@@ -88,7 +115,7 @@ ul.ce-menu ul {
 	padding-left: 10px;
 	line-height: 30px;
 	cursor: default;
-	user-select: none;
+	-webkit-user-select: none;
 }
 
 .ce-window.active {

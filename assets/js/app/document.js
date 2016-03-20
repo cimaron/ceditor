@@ -26,6 +26,25 @@
 			this.element.css('background-image', "url(" + bgImage + ")");
 		}
 
+		//Create snap areas
+		this.left = new CEWidgetVertical();
+		this.left.element.addClass('ce-snap ce-snap-left');
+		this.left.element.droppable({
+			accept : ".ce-window",
+			hoverClass : "ce-snap-snapping",
+			tolerance : 'pointer',
+			drop : function(e, ui) {
+				var win = ui.draggable.data('window');
+
+				this.attach(win);
+
+			}.bind(this.left)
+		});
+
+		this.left.element.resizable();
+
+		this.element.append(this.left.element);
+
 		CEWidget.prototype.init.apply(this, []);
 	};
 

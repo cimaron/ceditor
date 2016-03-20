@@ -32,9 +32,18 @@
 
 		this.element.append(this.titlebar);
 		this.element.append(this.body);
+		this.element.data('window', this);
 		this.titlebar.append(this.closeBtn);
 
-		this.element.draggable({ handle: this.titlebar });
+		this.element.draggable({
+			handle: this.titlebar,
+			start : function(e, ui) {
+				if (this.pinned) {
+					this.unpin();
+				}
+			}.bind(this)
+		});
+		
 		this.element.resizable();
 		
 		this.closeBtn.on('click', this.close.bind(this));
@@ -132,6 +141,18 @@
 	 */
 	CEWindow.prototype.toggle = function() {
 		this.element.toggle();
+	};
+
+	CEWindow.prototype.pin = function(parent_el) {
+		this.pinned = true;
+		this.element.draggable('option', 'distance', 20);
+		parent_el.append(this.element);
+	};
+
+	CEWindow.prototype.unpin = function() {
+		this.pinned = false;
+		this.element.draggable('option', 'distance', 1);
+		CEApp.document.element.append(this.element);
 	};
 
 	window.CEWindow = CEWindow;
