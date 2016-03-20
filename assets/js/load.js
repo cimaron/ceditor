@@ -59,6 +59,7 @@
 		("assets/js/widget/window.js"),
 		("assets/js/widget/vertical.js"),
 		("assets/js/windows/log.js"),
+		("assets/js/windows/config.js"),
 		("assets/js/widget/menu.js"),
 		("assets/js/widget/menuitem.js"),
 		("assets/js/ws.js"),
