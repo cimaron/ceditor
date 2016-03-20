@@ -120,6 +120,7 @@ ul.ce-menu ul {
 
 .ce-window.active {
 	border-color: #999999;
+	opacity: 1;
 }
 
 .ce-window.active .ce-window-title {
@@ -325,5 +326,31 @@ ul.ce-menu ul {
 	content: "";
 	clear: both;
 	display: block;
+}
+
+.ce-config {
+	left: 25%;
+	width: 50%;
+	top: 25%;
+	height: 50%;
+}
+
+.ce-config .ce-window-body {
+	padding: 10px;
+	overflow: auto;
+}
+
+.ce-config .ce-window-body table {
+	width: 100%;
+}
+
+.ce-config .ce-window-body label {
+	font-size: 16px;
+}
+
+.ce-config .ce-window-body input {
+	width: 100%;
+	padding: 6px;
+	box-sizing: border-box;
 }
 

@@ -33,11 +33,27 @@
 	};
 
 	/**
+	 * Remove variable
+	 */
+	CEConfig.prototype.remove = function(name, value) {
+		delete this.data[name];
+		this.save();
+	};
+
+	/**
 	 * Get variable
 	 */
 	CEConfig.prototype.get = function(name, def) {
 		return this.data[name] || def;
 	};	
+
+	/**
+	 * Get all variables
+	 */
+	CEConfig.prototype.getAll = function() {
+		return this.data;
+	};	
+
 
 	window.CEConfig = CEConfig;
 

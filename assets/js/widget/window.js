@@ -22,7 +22,7 @@
 		}
 
 		this.element.addClass('ce-window');
-		this.element.css({left : 0, top : 0});
+		//this.element.css({left : 0, top : 0});
 
 		this.titlebar = $('<div />').addClass('ce-window-title');
 		this.titlebar.append('<div class="ce-window-title-text" />');
