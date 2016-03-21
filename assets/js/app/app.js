@@ -28,15 +28,6 @@
 				view_log.on('click', function() {
 					CEApp.logger[this.selected ? 'show' : 'hide']();
 				});
-
-				var view_config = view.addItem("Config", {select:true});
-				if (this.config.get('config.open')) {
-					view_config.select();
-				}
-				view_config.on('click', function() {
-					CEApp.configWindow[this.selected ? 'show' : 'hide']();
-					CEApp.config.set('config.open', this.selected ? 1 : 0);
-				});
 			
 			this.document.setMenu(this.menu);
 

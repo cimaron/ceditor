@@ -35,10 +35,14 @@
 
 		var item = new CEMenuItem(name, options);
 
-		this.items.push(item);
+		this.items[name] = item;
 		this.element.append(item.element);
 
 		return item;
+	};
+
+	CEMenu.prototype.getItem = function(name) {
+		return this.items[name];
 	};
 
 	window.CEMenu = CEMenu;

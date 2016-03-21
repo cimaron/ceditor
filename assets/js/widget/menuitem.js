@@ -51,6 +51,10 @@
 		});
 	};
 
+	CEMenuItem.prototype.getMenu = function() {
+		return this.menu;
+	};
+
 	/**
 	 * Select item
 	 */

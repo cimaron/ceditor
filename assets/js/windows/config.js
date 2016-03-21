@@ -14,6 +14,7 @@
 		CEWindow.prototype.init.apply(this, []);
 
 		this.element.addClass('ce-config');
+		this.initMenu();
 
 		this.table = $('<table />');
 		this.body.append(this.table);
@@ -29,6 +30,24 @@
 
 		this.addRow();
 
+	};
+
+	CEWindowConfig.prototype.initMenu = function() {
+
+		var menu = CEApp.menu;
+		var view = menu.getItem('View').getMenu();
+
+		var item = view.addItem("Config", {select:true});
+		this.menuitem = item;
+
+		if (CEApp.config.get('config.open')) {
+			item.select();
+		}
+
+		item.on('click', function() {
+			CEApp.configWindow[this.selected ? 'show' : 'hide']();
+			CEApp.config.set('config.open', this.selected ? 1 : 0);
+		});
 	};
 
 	CEWindowConfig.prototype.addRow = function(name, data) {
@@ -91,6 +110,11 @@
 			;
 
 		this.table.append(row);
+	};
+
+	CEWindowConfig.prototype.close = function() {
+		this.menuitem.deselect();
+		this.hide();
 	};
 
 	window.CEWindowConfig = CEWindowConfig;
