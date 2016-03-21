@@ -1,18 +1,18 @@
 (function() {
 
 	/**
-	 * File Tree Class
+	 * Files Class
 	 */
-	function CEFileTree() {
+	function CEWindowFiles() {
 		this.cwd = CEApp.config.get("filetree.cwd", "/");
 
 		CEWindow.apply(this, ["Files"]);
 	}
 
 	//Inherit from Widget
-	util.inherits(CEFileTree, CEWindow);
+	util.inherits(CEWindowFiles, CEWindow);
 
-	CEFileTree.prototype.init = function() {
+	CEWindowFiles.prototype.init = function() {
 
 		CEWindow.prototype.init.apply(this, []);
 
@@ -53,7 +53,7 @@
 		this.refresh();
 	};
 
-	CEFileTree.prototype.refresh = function() {
+	CEWindowFiles.prototype.refresh = function() {
 
 		CEApp.ws.call('fs.lsStat', {path : this.cwd}).then(function(files) {
 
@@ -91,13 +91,13 @@
 		}.bind(this));
 	};
 
-	CEFileTree.prototype.click = function(e) {
+	CEWindowFiles.prototype.click = function(e) {
 		var el = $(e.target);
 		this.body.find("a").removeClass('selected');
 		el.addClass('selected');
 	};
 
-	CEFileTree.prototype.openSelected = function() {
+	CEWindowFiles.prototype.openSelected = function() {
 		var el = this.body.find("a.selected");
 		var path = el.data('path');
 		var cwd = this.cwd;
@@ -121,11 +121,11 @@
 		
 	};
 
-	CEFileTree.prototype.open = function(path) {
+	CEWindowFiles.prototype.open = function(path) {
 		var win = CEWindowEditorText.getInstance(path);
 		win.display();
 	};
 
-	window.CEFileTree = CEFileTree;
+	window.CEWindowFiles = CEWindowFiles;
 
 }());

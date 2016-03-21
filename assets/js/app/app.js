@@ -38,7 +38,7 @@
 		this.ws = new WS("ws://dev.cimaron.vm:1984");
 		this.ws.connect();
 
-		this.filelist = new CEFileTree();
+		this.filelist = new CEWindowFiles();
 		this.document.addChild(this.filelist);
 		this.filelist.element.css('top', 100);
 
