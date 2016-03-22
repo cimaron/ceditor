@@ -4,7 +4,7 @@
 	 * Editor Text Window Class
 	 */
 	function CEWindowEditorText(path) {
-		this.path = path;
+		this.file = new CEFile(path);
 		CEWindow.apply(this, [path]);
 	}
 
@@ -85,13 +85,9 @@
 	};
 	
 	CEWindowEditorText.prototype.open = function() {
-		CEApp.log("Opening " + this.path.split("/").slice(-1));
-		CEApp.ws.call('fs.readFile', {path : this.path}).then(function(data) {
+		this.file.open().then(function(data) {
 			this.editor.val(data);
-			this.value = data;
-			CEApp.log("Loaded " + this.path.split("/").slice(-1));
 		}.bind(this));
-
 	};
 
 	CEWindowEditorText.prototype.onClick = function() {
@@ -122,26 +118,19 @@
 
 		var val = this.editor.val();
 
-		if (val != this.value) {
+		if (val != this.file.content) {
 			this.dirty = true;
-			this.setTitle(this.path + " *");
+			this.setTitle(this.file.path + " *");
 		}
 	};
 
 	CEWindowEditorText.prototype.save = function() {
 
-		var path = this.path;
-		var data = this.editor.val();
-		CEApp.log("Saving " + this.path.split('/').slice(-1));
+		this.file.setContent(this.editor.val());
 
-		CEApp.ws.call('fs.writeFile', {
-			path : path,
-			data : data
-		}).then(function() {
+		this.file.save().then(function() {
 			this.dirty = false;
-			this.setTitle(this.path);
-			this.value = this.editor.val();
-			CEApp.log("Saved " + this.path.split('/').slice(-1));
+			this.setTitle(this.file.path);
 		}.bind(this));
 	};
 
