@@ -65,6 +65,7 @@
 		("assets/js/widget/menuitem.js"),
 		("assets/js/ws.js"),
 		("assets/js/windows/files.js"),
+		("assets/js/windows/editor.js"),
 		("assets/js/windows/editortext.js")
 	
 	]).then(function() {
