@@ -19,7 +19,7 @@
 		this.table = $('<table />');
 		this.body.append(this.table);
 
-		var data = CEApp.config.getAll();
+		var data = CEApp.config.getData();
 
 		var keys = Object.keys(data);
 		keys.sort();

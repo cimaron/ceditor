@@ -48,12 +48,21 @@
 	};	
 
 	/**
-	 * Get all variables
+	 * Get all data
 	 */
-	CEConfig.prototype.getAll = function() {
+	CEConfig.prototype.getData = function() {
 		return this.data;
 	};	
 
+	/**
+	 * Set all data
+	 *
+	 * @param   object   data
+	 */
+	CEConfig.prototype.setData = function(data) {
+		this.data = data;
+		this.save();
+	};
 
 	window.CEConfig = CEConfig;
 

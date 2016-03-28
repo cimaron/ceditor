@@ -50,7 +50,7 @@
 
 		//Load files here
 		("assets/js/node/node.js"),
-		("assets/js/config.js"),
+		("assets/js/app/config.js"),
 
 		("assets/js/widget/widget.js"),
 		("assets/js/app/app.js"),

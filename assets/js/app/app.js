@@ -55,6 +55,14 @@
 		if (!this.config.get('config.open')) {
 			this.configWindow.hide();
 		}
+
+		//Initialize default values
+		if (!this.config.get('config.version')) {
+			this.config.setData({
+				"config.version":0.1,
+				"desktop.backgroundImage":""
+			});
+		}
 	};
 
 	CEApp.log = function() {
