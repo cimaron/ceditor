@@ -14,6 +14,7 @@
 
 <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>	
 <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.3/ace.js"></script>
 <script src="assets/js/load.js"></script>	
 	
 </head>

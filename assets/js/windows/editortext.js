@@ -10,12 +10,12 @@
 	//Inherit from Widget
 	util.inherits(CEWindowEditorText, CEWindowEditor);
 
-//Continue removing CEEditor class stuff from CEEditorText
-
 	CEWindowEditorText.prototype.init = function() {
 		CEWindowEditor.prototype.init.apply(this, []);
 
-		this.body.html('<textarea class="ce-editor" spellcheck="false"></textarea>');
+		this.element.addClass('ce-editor-window-text');
+
+		this.body.html('<textarea class="ce-editor-text-textarea" spellcheck="false"></textarea>');
 		this.editor = this.body.find('textarea');
 		this.status = $('<div />').addClass('ce-editor-status');
 		this.statusPos = $('<span />').addClass('ce-editor-status-pos');

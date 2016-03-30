@@ -147,6 +147,7 @@ ul.ce-menu ul {
 }
 
 .ce-window-body {
+	position: relative;
 	background-color: #FFFFFF;
 	overflow: hidden;
 	height: 100%;
@@ -274,11 +275,11 @@ ul.ce-menu ul {
 }
 
 
-.ce-editor-window .ce-window-body {
+.ce-editor-window-text .ce-window-body {
 	padding-bottom: 30px;
 }
 
-.ce-editor {
+.ce-editor-window-text textarea {
 	box-sizing: border-box;
 	border: none;
 	outline: 0;
@@ -293,7 +294,7 @@ ul.ce-menu ul {
 	resize: none;
 }
 
-.ce-editor-status {
+.ce-editor-window-text .ce-editor-status {
 	position: absolute;
 	left: 0;
 	bottom: 0;
@@ -354,3 +355,11 @@ ul.ce-menu ul {
 	box-sizing: border-box;
 }
 
+.ce-window-body .ace_editor {
+	height: 100%;
+}
+
+.ce-window-body .ace-dreamweaver .ace_gutter {
+	color: #FFFFFF;
+	background-color: #3399FF;
+}

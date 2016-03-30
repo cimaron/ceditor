@@ -13,6 +13,7 @@
 
 
 	CEWindowEditor.instances = {};
+	CEWindowEditor.filetypes = null;
 
 	CEWindowEditor.getInstance = function(path) {
 
@@ -20,7 +21,26 @@
 			return this.instances[path];
 		}
 
-		this.instances[path] = new CEWindowEditorText(path);
+		if (this.filetypes === null) {
+			this.filetypes = {};
+			var filetypes = CEApp.config.get('document.filetypes');
+			for (var i = 0; i < filetypes.length; i++) {
+				var info = CEApp.config.get('document.filetypes.' + filetypes[i]);
+				var exts = info.extensions.split(",");
+				for (var j = 0; j < exts.length; j++) {
+					this.filetypes[exts[j]] = info;
+				}
+			}
+		}
+
+		var ext = path.substr(path.lastIndexOf('.') + 1);
+		if (this.filetypes[ext]) {
+			var className = this.filetypes[ext]['class'];
+		} else {
+			var className = "CEWindowEditorText";
+		}
+
+		this.instances[path] = new window[className](path);
 		
 		var openfiles = CEApp.config.get('editor.openfiles', []);
 		if (openfiles.indexOf(path) == -1) {
