@@ -37,6 +37,11 @@
 		return promise;
 	};
 
+	CEWindowEditorAce.prototype.save = function() {
+		this.file.setContent(this.editor.getValue());
+		CEWindowEditor.prototype.save.apply(this, arguments);
+	};
+
 	window.CEWindowEditorAce = CEWindowEditorAce;
 
 }());
