@@ -27,6 +27,21 @@
             this.editor.resize(); 
         }.bind(this));
 
+        this.editor.on('change', function(e) {
+
+    		if (this.dirty) {
+    			return;
+    		}
+    
+    		var val = this.editor.getValue();
+    
+    		if (val != this.file.content) {
+    			this.dirty = true;
+    			this.setTitle(this.file.path + " *");
+    		}
+            
+        }.bind(this));
+
 		this.open();
 	};
 
