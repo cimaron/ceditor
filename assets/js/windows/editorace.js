@@ -23,6 +23,10 @@
 
 		this.editor = editor;
 
+        this.on('resize', function(e, ui) {
+            this.editor.resize(); 
+        }.bind(this));
+
 		this.open();
 	};
 

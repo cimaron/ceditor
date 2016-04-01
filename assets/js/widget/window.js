@@ -44,7 +44,11 @@
 			}.bind(this)
 		});
 		
-		this.element.resizable();
+		this.element.resizable({
+		    stop: function(e, ui) {
+		        this.emit('resize', e, ui);
+		    }.bind(this)
+		});
 		
 		this.closeBtn.on('click', this.close.bind(this));
 
