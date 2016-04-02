@@ -51,6 +51,9 @@
 		
 		promise.then(function(data) {
 			this.editor.setValue(data, -1);
+			
+			this.editor.getSession().setUndoManager(new ace.UndoManager())
+
 		}.bind(this));
 	
 		return promise;
