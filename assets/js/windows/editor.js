@@ -3,8 +3,9 @@
 	/**
 	 * Editor Text Window Class
 	 */
-	function CEWindowEditor(path) {
+	function CEWindowEditor(path, config) {
 		this.file = new CEFile(path);
+		this.config = config || {};
 		CEWindow.apply(this, [path]);
 	}
 
@@ -34,13 +35,17 @@
 		}
 
 		var ext = path.substr(path.lastIndexOf('.') + 1);
+		var filetype;
+		
 		if (this.filetypes[ext]) {
-			var className = this.filetypes[ext]['class'];
+		    filetype = this.filetypes[ext];
 		} else {
-			var className = "CEWindowEditorText";
+			filetype = {
+			    "class" : "CEWindowEditorText"
+		    };
 		}
 
-		this.instances[path] = new window[className](path);
+		this.instances[path] = new window[filetype['class']](path, filetype);
 		
 		var openfiles = CEApp.config.get('editor.openfiles', []);
 		if (openfiles.indexOf(path) == -1) {
@@ -139,3 +144,4 @@
 	window.CEWindowEditor = CEWindowEditor;
 
 }());
+

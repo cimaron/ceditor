@@ -3,8 +3,8 @@
 	/**
 	 * ACE Editor Window Class
 	 */
-	function CEWindowEditorAce(path) {		
-		CEWindowEditor.apply(this, [path]);
+	function CEWindowEditorAce(path) {
+		CEWindowEditor.apply(this, arguments);
 	}
 
 	//Inherit from Widget
@@ -18,7 +18,7 @@
 
 		var editor = ace.edit(this.editorEl[0]);
 		editor.setTheme("ace/theme/dreamweaver");
-		editor.getSession().setMode("ace/mode/javascript");
+		editor.getSession().setMode("ace/mode/" + this.config.mode);
 		editor.setShowPrintMargin(false);
 
 		this.editor = editor;
