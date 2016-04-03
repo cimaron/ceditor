@@ -58,6 +58,7 @@
 		("assets/js/app/file.js"),
 		("assets/js/app/document.js"),
 		("assets/js/widget/window.js"),
+		("assets/js/widget/tabs.js"),
 		("assets/js/widget/vertical.js"),
 		("assets/js/windows/log.js"),
 		("assets/js/windows/config.js"),
