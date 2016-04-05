@@ -29,6 +29,7 @@ ul {
 	top: 30px;
 	height: 100%;
 	background-color: #FFFFFF;
+	z-index: 99999998;
 }
 
 .ce-snap-left {
@@ -46,7 +47,7 @@ ul {
 	top: 0;
 	left: 0;
 	width: 100%;
-	z-index: 999999999;
+	z-index: 99999999;
 }
 
 ul.ce-application-menu > li {
@@ -363,3 +364,4 @@ ul.ce-menu ul {
 	color: #FFFFFF;
 	background-color: #3399FF;
 }
+
