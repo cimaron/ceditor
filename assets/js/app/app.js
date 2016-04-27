@@ -41,6 +41,9 @@
 		this.filelist = new CEWindowFiles();
 		this.document.addChild(this.filelist);
 		this.filelist.element.css('top', 100);
+		this.filelist.element.height('600');
+        this.document.left.attach(this.filelist);
+        this.document.left.attach(this.logger);
 
 		//restore windows
 		var openfiles = this.config.get('editor.openfiles', []);
@@ -75,3 +78,4 @@
 	window.CEApp = CEApp;
 
 }());
+
