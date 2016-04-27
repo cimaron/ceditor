@@ -102,23 +102,41 @@
 		var path = el.data('path');
 		var cwd = this.cwd;
 
+		if (el.hasClass('ce-dir')) {
+            this.cd(path);
+		} else if (el.hasClass('ce-file')) {
+			path = this.removeTrailingSlash(cwd) + "/" + path;
+			this.open(path);
+		}
+	};
+
+	CEWindowFiles.prototype.cd = function(path) {
+        var cwd = this.cwd;
+
 		if (path == '..') {
 			cwd = cwd.split("/");
 			cwd.pop();
 			cwd = cwd.join("/");
+		} else if (path.substr(0, 1) == "/") {
+		    cwd = path;
 		} else {
-			cwd = cwd + (cwd != "/" ? "/" : "") + path;
+			cwd = this.removeTrailingSlash(cwd) + "/" + path;
 		}
-
+        
+        this.cwd = cwd;
 		CEApp.config.set("filetree.cwd", this.cwd);
 
-		if (el.hasClass('ce-dir')) {
-			this.cwd = cwd;
-			this.refresh();
-		} else if (el.hasClass('ce-file')) {
-			this.open(cwd);
-		}
+		this.refresh();
 		
+		CEApp.sites.setCwd(this.cwd);
+	};
+	
+	CEWindowFiles.prototype.removeTrailingSlash = function(path) {
+	    var parts = path.split("");
+	    if (parts.pop() == "/") {
+            return parts.join("");
+	    }
+	    return path;
 	};
 
 	CEWindowFiles.prototype.open = function(path) {
