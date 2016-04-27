@@ -309,6 +309,12 @@ ul.ce-menu ul {
 .ce-editor-status:hover {
 	opacity: 1;
 }
+
+.ce-window-sites select {
+    width: 100%;
+    padding: 4px;
+}
+
 .ce-window-log {
 	height: 200px;
 }

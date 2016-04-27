@@ -65,6 +65,7 @@
 		("assets/js/widget/menu.js"),
 		("assets/js/widget/menuitem.js"),
 		("assets/js/ws.js"),
+		("assets/js/windows/sites.js"),
 		("assets/js/windows/files.js"),
 		("assets/js/windows/editor.js"),
 		("assets/js/windows/editortext.js"),

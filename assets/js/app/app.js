@@ -31,17 +31,20 @@
 			
 			this.document.setMenu(this.menu);
 
+        this.sites = new CEWindowSites();
+        this.document.addChild(this.sites);
+
 		this.logger = new CEWindowLog();
 		this.document.addChild(this.logger);
-		this.logger.element.css('top', 500);
 
 		this.ws = new WS("ws://dev.cimaron.vm:1984");
 		this.ws.connect();
 
 		this.filelist = new CEWindowFiles();
-		this.document.addChild(this.filelist);
-		this.filelist.element.css('top', 100);
 		this.filelist.element.height('600');
+		this.document.addChild(this.filelist);
+
+        this.document.left.attach(this.sites);
         this.document.left.attach(this.filelist);
         this.document.left.attach(this.logger);
 

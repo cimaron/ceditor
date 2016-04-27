@@ -69,7 +69,7 @@
 
 			var out = "";
 			
-			if (this.cwd != "/") {
+			if (this.cwd != CEApp.sites.getCurrent().path) {
 				out += '<div><a href="#" class="ce-dir" data-path="..">..</a></div>';
 			}
 
