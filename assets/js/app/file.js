@@ -13,6 +13,14 @@
 		this.path = path;
 		return this;
 	};
+	
+	CEFile.prototype.getPath = function() {
+		return this.path;
+	};
+	
+	CEFile.prototype.getFilename = function() {
+	    return this.path.split("/").pop();
+	};
 
 	CEFile.prototype.setContent = function(content) {
 		this.content = content;
