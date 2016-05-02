@@ -158,7 +158,7 @@
 	};
 
 	CEWindowFiles.prototype.open = function(path) {
-		var win = CEWindowEditor.getInstance(path);
+		var win = CEEditor.getInstance(path);
 		win.display();
 	};
 

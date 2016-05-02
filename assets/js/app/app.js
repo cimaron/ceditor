@@ -52,7 +52,7 @@
 		var openfiles = this.config.get('editor.openfiles', []);
 
 		for (var i = 0; i < openfiles.length; i++) {
-			var win = CEWindowEditor.getInstance(openfiles[i]);
+			var win = CEEditor.getInstance(openfiles[i]);
 			win.display();
 		}
 

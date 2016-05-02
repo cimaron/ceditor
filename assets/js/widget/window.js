@@ -17,11 +17,10 @@
 	 */	
 	CEWindow.prototype.init = function() {
 		
-		if (!this.element || this.element.length == 0) {
-			this.element = 	$('<div />');
-		}
+		this.element = 	$('<div />')
+		    .addClass('ce-window')
+		    ;
 
-		this.element.addClass('ce-window');
 		//this.element.css({left : 0, top : 0});
 
 		this.titlebar = $('<div />').addClass('ce-window-title');

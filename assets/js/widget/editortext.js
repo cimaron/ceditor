@@ -1,22 +1,28 @@
 (function() {
 
 	/**
-	 * Editor Text Window Class
+	 * Editor Text Class
 	 */
-	function CEWindowEditorText(path) {		
-		CEWindowEditor.apply(this, [path]);
+	function CEEditorText(path) {		
+		CEEditor.apply(this, [path]);
 	}
 
 	//Inherit from Widget
-	util.inherits(CEWindowEditorText, CEWindowEditor);
+	util.inherits(CEEditorText, CEEditor);
 
-	CEWindowEditorText.prototype.init = function() {
-		CEWindowEditor.prototype.init.apply(this, []);
+	CEEditorText.prototype.init = function() {
 
-		this.element.addClass('ce-editor-window-text');
+		CEEditor.prototype.init.apply(this, []);
 
-		this.body.html('<textarea class="ce-editor-text-textarea" spellcheck="false"></textarea>');
-		this.editor = this.body.find('textarea');
+		this.element.addClass('ce-editor-text');
+
+		this.editor = $('<textarea />')
+		    .addClass('ce-editor-text-textarea')
+		    .attr('spellcheck', "false")
+		    ;
+		
+        this.element.append(this.editor);
+		
 		this.status = $('<div />').addClass('ce-editor-status');
 		this.statusPos = $('<span />').addClass('ce-editor-status-pos');
 
@@ -32,7 +38,7 @@
 			.append(this.searchNext)
 			;
 
-		this.body.append(this.status);
+		this.element.append(this.status);
 		this.status.append(this.statusPos);
 		this.status.append(this.searchBox);
 
@@ -46,7 +52,7 @@
 	};
 
 
-	CEWindowEditorText.prototype.bindTab = function() {
+	CEEditorText.prototype.bindTab = function() {
 
 		var win = this;
 
@@ -95,7 +101,7 @@
 
 	};
 	
-	CEWindowEditorText.prototype.indent = function() {
+	CEEditorText.prototype.indent = function() {
 		var start = this.editor[0].selectionStart;
 		var end = this.editor[0].selectionEnd;
 		
@@ -109,9 +115,9 @@
 
 	};
 
-	CEWindowEditorText.prototype.open = function() {
+	CEEditorText.prototype.open = function() {
 
-		var promise = CEWindowEditor.prototype.open.apply(this);
+		var promise = CEEditor.prototype.open.apply(this);
 		
 		promise.then(function(data) {
 			this.editor.val(data);
@@ -120,12 +126,7 @@
 		return promise;
 	};
 
-	CEWindowEditorText.prototype.onClick = function() {
-		CEWindowEditorText.current = this;
-		CEWindow.prototype.onClick.apply(this, arguments);
-	};
-
-	CEWindowEditorText.prototype.updateStatus = function() {
+	CEEditorText.prototype.updateStatus = function() {
 		var pos = this.editor.prop('selectionStart');
 		this.lastPos = pos;
 
@@ -136,7 +137,7 @@
 		this.statusPos.text(/*"raw: " + pos + " | " + */ "row: " + row + " | col: " + col);
 	};
 
-	CEWindowEditorText.prototype.onKeyup = function(e) {
+	CEEditorText.prototype.onKeyup = function(e) {
 
 		this.updateStatus();
 
@@ -148,16 +149,16 @@
 
 		if (val != this.file.content) {
 			this.dirty = true;
-			this.setTitle(this.file.path + " *");
+			this.updateTitle();
 		}
 	};
 
-	CEWindowEditorText.prototype.save = function() {
+	CEEditorText.prototype.save = function() {
 		this.file.setContent(this.editor.val());
-		CEWindowEditor.prototype.save.apply(this, arguments);
+		CEEditor.prototype.save.apply(this, arguments);
 	};
 
-	CEWindowEditorText.prototype.search = function(e) {
+	CEEditorText.prototype.search = function(e) {
 
 		if (e.which != 13) {
 			return;
@@ -189,6 +190,6 @@
 		CEApp.log(pos);
 	};
 
-	window.CEWindowEditorText = CEWindowEditorText;
+	window.CEEditorText = CEEditorText;
 
 }());

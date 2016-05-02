@@ -60,6 +60,13 @@
 		("assets/js/widget/window.js"),
 		("assets/js/widget/tabs.js"),
 		("assets/js/widget/vertical.js"),
+
+        //Editors
+        ("assets/js/windows/editor.js"),
+		("assets/js/widget/editor.js"),
+		("assets/js/widget/editorace.js"),
+		("assets/js/widget/editortext.js"),
+
 		("assets/js/windows/log.js"),
 		("assets/js/windows/config.js"),
 		("assets/js/widget/menu.js"),
@@ -67,10 +74,6 @@
 		("assets/js/ws.js"),
 		("assets/js/windows/sites.js"),
 		("assets/js/windows/files.js"),
-		("assets/js/windows/editor.js"),
-		("assets/js/windows/editortext.js"),
-		("assets/js/windows/editorace.js")
-	
 	]).then(function() {
 
 		CEApp.init();

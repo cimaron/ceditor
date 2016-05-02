@@ -4,7 +4,6 @@
 	 * Editor Text Window Class
 	 */
 	function CEWindowEditor(path, config) {
-		this.file = new CEFile(path);
 		this.config = config || {};
 		CEWindow.apply(this, [path]);
 	}
@@ -12,101 +11,39 @@
 	//Inherit from Widget
 	util.inherits(CEWindowEditor, CEWindow);
 
-
-	CEWindowEditor.instances = {};
-	CEWindowEditor.filetypes = null;
-
-	CEWindowEditor.getInstance = function(path) {
-
-		if (this.instances[path]) {
-			return this.instances[path];
-		}
-
-		if (this.filetypes === null) {
-			this.filetypes = {};
-			var filetypes = CEApp.config.get('document.filetypes');
-			for (var i = 0; i < filetypes.length; i++) {
-				var info = CEApp.config.get('document.filetypes.' + filetypes[i]);
-				var exts = info.extensions.split(",");
-				for (var j = 0; j < exts.length; j++) {
-					this.filetypes[exts[j]] = info;
-				}
-			}
-		}
-
-		var ext = path.substr(path.lastIndexOf('.') + 1);
-		var filetype;
-		
-		if (this.filetypes[ext]) {
-		    filetype = this.filetypes[ext];
-		} else {
-			filetype = {
-			    "class" : "CEWindowEditorText"
-		    };
-		}
-
-		this.instances[path] = new window[filetype['class']](path, filetype);
-		
-		var openfiles = CEApp.config.get('editor.openfiles', []);
-		if (openfiles.indexOf(path) == -1) {
-			openfiles.push(path);
-			CEApp.config.set('editor.openfiles', openfiles);
-		}
-
-		return this.instances[path];
-	};
-
 	CEWindowEditor.prototype.init = function() {
 		CEWindow.prototype.init.apply(this, []);
-
 		this.element.addClass('ce-editor-window');
-
-		CEApp.currentEditor = this;
-		CEWindowEditor.current = this;
 	};
 
-	/**
-	 * Open file
-	 *
-	 * @return  promise
-	 */
-	CEWindowEditor.prototype.open = function() {
-		return this.file.open();
-	};
+    /**
+     * Set editor for the window
+     * 
+     * @param   CEEditor   editor   The editor object
+     * 
+     * @return  this
+     */
+    CEWindowEditor.prototype.setEditor = function(editor) {
 
-	/**
-	 * Save file
-	 *
-	 * @return  promise
-	 */
-	CEWindowEditor.prototype.save = function() {
-		var save, then;
+        this.editor = editor;
+        this.body.append(editor.element);
+        editor.window = this;
 
-		save = this.file.save();
+        this.titlebar.attr('title', this.editor.file.getPath());
 
-		then = save.then(function() {
-			this.dirty = false;
-			this.setTitle(this.file.path);
-		}.bind(this));
-
-		return then;
-	};
+        return this;
+    };
 
 	/**
 	 * Close editor window
 	 */
 	CEWindowEditor.prototype.close = function(e) {
-
 		CEWindow.prototype.close.apply(this, [e]);
-		delete CEWindowEditor.instances[this.file.path];
-
-		var openfiles = CEApp.config.get('editor.openfiles', []);
-		openfiles.splice(openfiles.indexOf(this.path), 1);
-		CEApp.config.set('editor.openfiles', openfiles);
+	    this.editor.close();
 	};
 
 	CEWindowEditor.prototype.onClick = function() {
-		CEWindowEditor.current = this;
+		CEEditor.current = this.editor;
 		CEWindow.prototype.onClick.apply(this, arguments);
 	};
 
@@ -126,20 +63,10 @@
 		this.setActive();
 	};
 
-	CEWindowEditor.current = null;
-
-	CEWindowEditor.saveCurrent = function() {
-
-		var current = CEWindow.getActiveWindow();
-
-		if (current instanceof CEWindowEditor) {
-			current.save();
-		}
-	};
-
-	//Events
-	CEApp.on('key.ctrl-s', CEWindowEditor.saveCurrent);
-
+    CEWindowEditor.prototype.redraw = function() {
+        this.updateTitle();
+        CEWindow.prototype.redraw.apply(this, arguments);
+    };
 
 	window.CEWindowEditor = CEWindowEditor;
 
