@@ -42,9 +42,12 @@
 	    this.editor.close();
 	};
 
-	CEWindowEditor.prototype.onClick = function() {
+	/**
+	 * Set current window as active
+	 */
+	CEWindowEditor.prototype.setActive = function(force) {
+	    CEWindow.prototype.setActive.apply(this, [force]);
 		CEEditor.current = this.editor;
-		CEWindow.prototype.onClick.apply(this, arguments);
 	};
 
 	CEWindowEditor.prototype.display = function() {
